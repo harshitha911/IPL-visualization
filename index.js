@@ -3,6 +3,7 @@ const csv = require("csvtojson");
 const matchesPlayedPerYear = require("./ipl/matchesPlayedPerYear");
 const teamsWonperYear = require("./ipl/teamsWonperYear");
 const teamExtraRuns = require("./ipl/teamExtraRuns");
+const economicBowlers = require("./ipl/economicBowlers")
 
 const MATCHES_FILE_PATH = "./csv_data/matches.csv";
 const DELIVERIES_FILE_PATH = "./csv_data/deliveries.csv";
@@ -10,6 +11,8 @@ const DELIVERIES_FILE_PATH = "./csv_data/deliveries.csv";
 const JSON_OUTPUT_FILE_PATH = "./public/data.json";
 const JSON_OUTPUT_FILE_PATH_1 = "./public/data_1.json";
 const JSON_OUTPUT_FILE_PATH_2 = "./public/data_2.json";
+const JSON_OUTPUT_FILE_PATH_3 = "./public/data_3.json";
+
 
 function main() {
   csv()
@@ -28,6 +31,8 @@ function main() {
      .then(deliveries => {
      let result_2 = teamExtraRuns(matches,deliveries);
      saveteamExtraRuns(result_2);
+     let result_3 = economicBowlers(matches,deliveries);
+     saveEconomicBowlers(result_3)
   });
 });
 }
@@ -65,4 +70,15 @@ function saveteamExtraRuns(result_2) {
     }
   });
 }
+  function saveEconomicBowlers(result_3) {
+    const jsonData = {
+      economicBowlers : result_3
+    };
+    const jsonString = JSON.stringify(jsonData);
+    fs.writeFile(JSON_OUTPUT_FILE_PATH_3, jsonString, "utf8", err => {
+      if (err) {
+        console.error(err);
+      }
+    });
+  }
 main();
