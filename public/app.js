@@ -201,7 +201,7 @@ console.log(seriesData);
       text: 'Top 10 economy bowlers in 2015'
     },
     subtitle: {
-      text: 'Source: <a href="http://en.wikipedia.org/wiki/List_of_cities_proper_by_population">Wikipedia</a>'
+      text: 'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>'
     },
     xAxis: {
       type: 'category'
@@ -232,4 +232,71 @@ console.log(seriesData);
       }
     }]
   });
+}
+function fetchAndVisualizeData_4() {
+  fetch("./data_4.json")
+    .then(r => r.json())
+    .then(visualizeData_4);
+}
+
+fetchAndVisualizeData_4();
+
+function visualizeData_4(data_4) {
+  visualizerunsScoredbyKohli(data_4.runsScoredbyKohli);
+  return;
+}
+
+function visualizerunsScoredbyKohli(runsScoredbyKohli) {
+  const seriesData = [];
+  for (let year in runsScoredbyKohli) {
+    seriesData.push([year, runsScoredbyKohli[year]]);
+  }
+
+  function fetchAndVisualizeData() {
+    fetch("./data_3.json")
+      .then(r => r.json())
+      .then(visualizeData_3);
+  }
+  
+  fetchAndVisualizeData_3();
+  
+  function visualizeData_3(data_3) {
+    visualizerunsScoredbyKohli(data_3.runsScoredbyKohli);
+    return;
+  }
+  
+  function visualizerunsScoredbyKohli(runsScoredbyKohli) {
+    const seriesData = [];
+    for (let year in runsScoredbyKohli) {
+      seriesData.push([year, runsScoredbyKohli[year]]);
+    }
+  
+    Highcharts.chart("runs-scored-by-kohli", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Runs Scored by Virat Kohli"
+      },
+      subtitle: {
+        text:
+          'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>'
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: "Runs Scored"
+        }
+      },
+      series: [
+        {
+          name: "Years",
+          data: seriesData
+        }
+      ]
+    });
+  }
 }

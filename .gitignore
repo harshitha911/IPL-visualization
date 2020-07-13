@@ -89,3 +89,4 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+ipl/runsScoredbyKholi.js
