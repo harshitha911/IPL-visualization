@@ -91,7 +91,7 @@ function saveteamExtraRuns(result_2) {
 
   function saveRunsScoredbyKohli(result_4) {
     const jsonData = {
-      runsScoredbyKholi : result_4
+      runsScoredbyKohli : result_4
     };
     const jsonString = JSON.stringify(jsonData);
     fs.writeFile(JSON_OUTPUT_FILE_PATH_4, jsonString, "utf8", err => {
