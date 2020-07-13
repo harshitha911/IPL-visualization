@@ -252,51 +252,31 @@ function visualizerunsScoredbyKohli(runsScoredbyKohli) {
     seriesData.push([year, runsScoredbyKohli[year]]);
   }
 
-  function fetchAndVisualizeData() {
-    fetch("./data_3.json")
-      .then(r => r.json())
-      .then(visualizeData_3);
-  }
-  
-  fetchAndVisualizeData_3();
-  
-  function visualizeData_3(data_3) {
-    visualizerunsScoredbyKohli(data_3.runsScoredbyKohli);
-    return;
-  }
-  
-  function visualizerunsScoredbyKohli(runsScoredbyKohli) {
-    const seriesData = [];
-    for (let year in runsScoredbyKohli) {
-      seriesData.push([year, runsScoredbyKohli[year]]);
-    }
-  
-    Highcharts.chart("runs-scored-by-kohli", {
-      chart: {
-        type: "column"
-      },
+  Highcharts.chart("runs-scored-by-kohli", {
+    chart: {
+      type: "column"
+    },
+    title: {
+      text: "Runs Scored by Virat Kohli"
+    },
+    subtitle: {
+      text:
+        'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>'
+    },
+    xAxis: {
+      type: "category"
+    },
+    yAxis: {
+      min: 0,
       title: {
-        text: "Runs Scored by Virat Kohli"
-      },
-      subtitle: {
-        text:
-          'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>'
-      },
-      xAxis: {
-        type: "category"
-      },
-      yAxis: {
-        min: 0,
-        title: {
-          text: "Runs Scored"
-        }
-      },
-      series: [
-        {
-          name: "Years",
-          data: seriesData
-        }
-      ]
-    });
-  }
+        text: "Runs Scored"
+      }
+    },
+    series: [
+      {
+        name: "Years",
+        data: seriesData
+      }
+    ]
+  });
 }
